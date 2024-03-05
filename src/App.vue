@@ -2,6 +2,9 @@
 import axios from 'axios';
 import {store} from './store.js';
 
+
+import CardsList from './components/CardsList.vue';
+
 export default {
  data() {
    return {
@@ -10,9 +13,13 @@ export default {
    }
   },
 
+  components: {
+    CardsList,
+  },
+
    created() {
+
     axios.get('https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0').then(response => {
-      console.log(response.data.data); 
       this.store.cards = response.data.data;
     });
     
@@ -24,7 +31,10 @@ export default {
 </script>
 
 <template>
-  hello
+  <div class="container">
+    <CardsList></CardsList>
+
+  </div>
   
 </template>
 
